@@ -8,8 +8,10 @@
 //}
 package tel.bvm.EmployeeNameTestWithMavenLibrary.service;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import tel.bvm.EmployeeNameTestWithMavenLibrary.exception.EmployeeAlreadyAddedException;
+import tel.bvm.EmployeeNameTestWithMavenLibrary.exception.EmployeeNamesNotCorrect;
 import tel.bvm.EmployeeNameTestWithMavenLibrary.exception.EmployeeNotFoundException;
 import tel.bvm.EmployeeNameTestWithMavenLibrary.scheme.Employee;
 
@@ -40,53 +42,78 @@ public class EmployeeServiceImpl implements tel.bvm.EmployeeNameTestWithMavenLib
 
     @Override
     public Map add(String firstName, String lastName, String passwordNumber, Integer yearBirth, Employee employee) {
+        boolean namesCorrect = StringUtils.isAlphaSpace(firstName) && StringUtils.isAlphaSpace(lastName);
+        String idEmployeeInfo = firstName + lastName + passwordNumber;
 
         if (employee == null) {
             Employee employeeNew = new Employee(firstName, lastName, passwordNumber, yearBirth, wageValueGenerator(), departmentNumberGenerator());
-            String idEmployeeInfo = firstName + lastName + passwordNumber;
 
             if (employeeMap.containsKey(idEmployeeInfo)) {
                 throw new EmployeeAlreadyAddedException();
             }
             employeeMap.put(idEmployeeInfo, employeeNew);
         } else {
+//            String idEmployeeInfo = firstName + lastName + passwordNumber;
+            if (namesCorrect) {
+                employeeMap.put(idEmployeeInfo, employee);
+            }
+            throw new EmployeeNamesNotCorrect();
+        }
+//        Сharacter.isUpperCase(str.charAt(0))
+        return employeeMap;
+
+//        if (employee == null) {
+//            Employee employeeNew = new Employee(firstName, lastName, passwordNumber, yearBirth, wageValueGenerator(), departmentNumberGenerator());
+//            String idEmployeeInfo = firstName + lastName + passwordNumber;
+////            if (!StringUtils.isAlphaSpace(firstName)) {
+////
+////            }
+//            if (namesCorrect) {
+//                if (employeeMap.containsKey(idEmployeeInfo)) {
+//                    throw new EmployeeAlreadyAddedException();
+//                }
+//                employeeMap.put(idEmployeeInfo, employeeNew);
+//            } else {
+//                String idEmployeeInfo = firstName + lastName + passwordNumber;
+//                employeeMap.put(idEmployeeInfo, employee);
+//            }
+//            return employeeMap;
+//        }
+//        throw new EmployeeNamesNotCorrect();
+//        }
+//    }
+
+        @Override
+        public Employee remove (String firstName, String lastName, String passwordNumber){
             String idEmployeeInfo = firstName + lastName + passwordNumber;
-            employeeMap.put(idEmployeeInfo, employee);
+            Employee employee = employeeMap.get(idEmployeeInfo);
+            if (employee != null) {
+                employeeMap.remove(idEmployeeInfo, employee);
+                return employee;
+            }
+            throw new EmployeeNotFoundException();
         }
-        return employeeMap;
-    }
 
-    @Override
-    public Employee remove(String firstName, String lastName, String passwordNumber) {
-        String idEmployeeInfo = firstName + lastName + passwordNumber;
-        Employee employee = employeeMap.get(idEmployeeInfo);
-        if (employee != null) {
-            employeeMap.remove(idEmployeeInfo, employee);
-            return employee;
+        @Override
+        public Employee find (String firstName, String lastName, String passwordNumber){
+            String idEmployeeInfo = firstName + lastName + passwordNumber;
+            Employee employee = employeeMap.get(idEmployeeInfo);
+            if (employee != null) {
+                employeeMap.get(employee);
+                return employee;
+            }
+            throw new EmployeeNotFoundException();
         }
-        throw new EmployeeNotFoundException();
-    }
 
-    @Override
-    public Employee find(String firstName, String lastName, String passwordNumber) {
-        String idEmployeeInfo = firstName + lastName + passwordNumber;
-        Employee employee = employeeMap.get(idEmployeeInfo);
-        if (employee != null) {
-            employeeMap.get(employee);
-            return employee;
+        @Override
+        public Map<String, Employee> allEmployeeInfo () {
+            return Collections.unmodifiableMap(employeeMap);
         }
-        throw new EmployeeNotFoundException();
-    }
 
-    @Override
-    public Map<String, Employee> allEmployeeInfo() {
-        return Collections.unmodifiableMap(employeeMap);
+        @Override
+        public Map<String, Employee> getMap () {
+            return employeeMap;
+        }
     }
-
-    @Override
-    public Map<String, Employee> getMap() {
-        return employeeMap;
-    }
-}
 
 
