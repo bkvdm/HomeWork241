@@ -9,7 +9,6 @@
 package tel.bvm.EmployeeNameTestWithMavenLibrary.service;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.text.WordUtils;
 import org.springframework.stereotype.Service;
 import tel.bvm.EmployeeNameTestWithMavenLibrary.exception.EmployeeAlreadyAddedException;
 import tel.bvm.EmployeeNameTestWithMavenLibrary.exception.EmployeeNamesNotCorrect;
@@ -77,6 +76,15 @@ public class EmployeeServiceImpl implements tel.bvm.EmployeeNameTestWithMavenLib
         }
         throw new EmployeeNamesNotCorrect();
     }
+
+    @Override
+    public Map addAcceptedEmployees(String firstName, String lastName, String passwordNumber, Integer yearBirth) {
+        String idEmployeeInfo = firstName + lastName + passwordNumber;
+        Employee employee = new Employee(firstName, lastName, passwordNumber, yearBirth, wageValueGenerator(), departmentNumberGenerator());
+        employeeMap.put(idEmployeeInfo, employee);
+        return employeeMap;
+    }
+
 
     @Override
     public Employee remove(String firstName, String lastName, String passwordNumber) {

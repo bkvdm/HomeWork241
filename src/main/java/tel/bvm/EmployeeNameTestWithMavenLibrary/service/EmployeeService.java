@@ -16,6 +16,8 @@ public interface EmployeeService {
 
     Map add(String firstName, String lastName, String passwordNumber, Integer yearBirth);
 
+    Map addAcceptedEmployees(String firstName, String lastName, String passwordNumber, Integer yearBirth);
+
     Employee remove(String firstName, String lastName, String passwordNumber);
 
     Employee find(String firstName, String lastName, String passwordNumber);
