@@ -59,29 +59,21 @@ public class EmployeeServiceImpl implements tel.bvm.EmployeeNameTestWithMavenLib
             }
         }
         return nameClean;
+//        return StringUtils.capitalize(anyName.toLowerCase());
     }
 
-//    public String employeeNameMatches(String anyName) {
-//        String nameClean = anyName.substring(0, 1).toUpperCase() + anyName.substring(1).toLowerCase();
-//        return nameClean;
-//    }
-
     @Override
-    public Map add(String firstName, String lastName, String passwordNumber, Integer yearBirth, Employee employee) {
+    public Map add(String firstName, String lastName, String passwordNumber, Integer yearBirth) {
         boolean namesCorrect = StringUtils.isAlpha(firstName) && StringUtils.isAlpha(lastName);
         String idEmployeeInfo = firstName + lastName + passwordNumber;
-        if (employee == null) {
-            Employee employeeNew = new Employee(firstName, lastName, passwordNumber, yearBirth, wageValueGenerator(), departmentNumberGenerator());
-            if (employeeMap.containsKey(idEmployeeInfo)) {
-                throw new EmployeeAlreadyAddedException();
-            }
-            employeeMap.put(idEmployeeInfo, employeeNew);
+        if (employeeMap.containsKey(idEmployeeInfo)) {
+            throw new EmployeeAlreadyAddedException();
         } else if (namesCorrect) {
             firstName = employeeNameMatches(firstName);
             lastName = employeeNameMatches(lastName);
             idEmployeeInfo = firstName + lastName + passwordNumber;
+            Employee employee = new Employee(firstName, lastName, passwordNumber, yearBirth, wageValueGenerator(), departmentNumberGenerator());
             employeeMap.put(idEmployeeInfo, employee);
-        return employeeMap;
         }
         throw new EmployeeNamesNotCorrect();
     }

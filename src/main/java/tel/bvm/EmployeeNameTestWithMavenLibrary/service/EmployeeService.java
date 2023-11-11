@@ -14,7 +14,7 @@ import java.util.Map;
 
 public interface EmployeeService {
 
-    Map add(String firstName, String lastName, String passwordNumber, Integer yearBirth, Employee employee);
+    Map add(String firstName, String lastName, String passwordNumber, Integer yearBirth);
 
     Employee remove(String firstName, String lastName, String passwordNumber);
 
