@@ -41,24 +41,7 @@ public class EmployeeServiceImpl implements tel.bvm.EmployeeNameTestWithMavenLib
     }
 
     public String employeeNameMatches(String anyName) {
-        String nameClean = null;
-
-        for (int letter = 0; letter < anyName.length(); letter++) {
-            char checkLetter;
-
-            if (letter == 0) {
-                if (!Character.isUpperCase(anyName.charAt(letter))) {
-                    checkLetter = Character.toUpperCase(anyName.charAt(letter));
-                    nameClean = checkLetter + anyName.substring(1);
-                }
-            }
-            if (Character.isUpperCase(anyName.charAt(letter))) {
-                checkLetter = Character.toLowerCase(anyName.charAt(letter));
-                nameClean = checkLetter + anyName.substring(letter + 1);
-            }
-        }
-        return nameClean;
-//        return StringUtils.capitalize(anyName.toLowerCase());
+        return anyName.substring(0, 1).toUpperCase() + anyName.substring(1).toLowerCase();
     }
 
     @Override
@@ -73,8 +56,10 @@ public class EmployeeServiceImpl implements tel.bvm.EmployeeNameTestWithMavenLib
             idEmployeeInfo = firstName + lastName + passwordNumber;
             Employee employee = new Employee(firstName, lastName, passwordNumber, yearBirth, wageValueGenerator(), departmentNumberGenerator());
             employeeMap.put(idEmployeeInfo, employee);
+        } else {
+            throw new EmployeeNamesNotCorrect();
         }
-        throw new EmployeeNamesNotCorrect();
+        return employeeMap;
     }
 
     @Override
@@ -84,7 +69,6 @@ public class EmployeeServiceImpl implements tel.bvm.EmployeeNameTestWithMavenLib
         employeeMap.put(idEmployeeInfo, employee);
         return employeeMap;
     }
-
 
     @Override
     public Employee remove(String firstName, String lastName, String passwordNumber) {
