@@ -41,9 +41,9 @@ public class EmployeeServiceImpl implements tel.bvm.EmployeeNameTestWithMavenLib
     }
 
     public String employeeNameMatches(String anyName) {
-        return anyName.substring(0, 1).toUpperCase() + anyName.substring(1).toLowerCase();
+        return StringUtils.capitalize(anyName.toLowerCase());
     }
-
+//        return anyName.substring(0, 1).toUpperCase() + anyName.substring(1).toLowerCase();
     @Override
     public Map add(String firstName, String lastName, String passwordNumber, Integer yearBirth) {
         boolean namesCorrect = StringUtils.isAlpha(firstName) && StringUtils.isAlpha(lastName);
