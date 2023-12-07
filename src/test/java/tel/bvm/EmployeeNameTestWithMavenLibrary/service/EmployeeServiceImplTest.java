@@ -9,6 +9,8 @@ import tel.bvm.EmployeeNameTestWithMavenLibrary.scheme.Employee;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 @ExtendWith(MockitoExtension.class)
 
 public class EmployeeServiceImplTest {
@@ -18,7 +20,7 @@ public class EmployeeServiceImplTest {
     private final Employee SECOND_EMPLOYEE = new Employee("Петров", "Пётр", "01010101", 1980, 100200, 4);
     private final Employee THREE_EMPLOYEE = new Employee("Смирнов", "Семён", "20202020", 1985, 100300, 3);
     private final Employee FOUR_EMPLOYEE = new Employee("Владимиров", "Владимир", "02020202", 1990, 100400, 2);
-    private final Employee FIVE_EMPLOYEE = new Employee("Тимофеев", "Тимофей", "303030303", 1995, 100500, 5);
+    private final Employee FIVE_EMPLOYEE = new Employee("Тимофеев", "Тимофей", "303030303", 1995, 100500, 1);
 
     @BeforeEach
     void setUp() {
@@ -26,23 +28,14 @@ public class EmployeeServiceImplTest {
         Map<String, Employee> employeeMap = new HashMap<>();
         employeeMap.put(id, FIRST_EMPLOYEE);
         out = new EmployeeServiceImpl(employeeMap);
-
     }
 
     @Test
     public void addEmployeeVerify() {
-        Employee add = out.add(
-                FIRST_EMPLOYEE.getFirstName(),
-                FIRST_EMPLOYEE.getLastName(),
-                FIRST_EMPLOYEE.getPasswordNumber(),
-                FIRST_EMPLOYEE.getYearBirth());
-/*                FIRST_EMPLOYEE.getWage(),
-                FIRST_EMPLOYEE.getDepartmentNumber());*/
-
-
-        //        Employee add = out.add(FIRST_EMPLOYEE.getFirstName(), FIRST_EMPLOYEE.getLastName(), "10101010", 1975);
-
-
+        Map<String, Employee> employeeMap = new HashMap<>();
+        String id = FIRST_EMPLOYEE.getFirstName() + FIRST_EMPLOYEE.getLastName() + FIRST_EMPLOYEE.getPasswordNumber();
+        Employee add = out.add(employeeMap.put(id, FIRST_EMPLOYEE));
+        assertEquals(FIRST_EMPLOYEE, add);
     }
 
     @Test
