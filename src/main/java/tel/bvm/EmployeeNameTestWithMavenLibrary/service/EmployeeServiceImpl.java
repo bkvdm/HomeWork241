@@ -20,25 +20,11 @@ import java.util.*;
 @Service
 public class EmployeeServiceImpl implements tel.bvm.EmployeeNameTestWithMavenLibrary.service.EmployeeService {
 
-    public final Map<String, Employee> employeeMap;
+//    public final Map<String, Employee> employeeMap;
 
-    public EmployeeServiceImpl(Map<String, Employee> employeeMap) {
-        this.employeeMap = employeeMap;
-    }
-
-    public int departmentNumberGenerator() {
-        java.util.Random random = new java.util.Random();
-        int minimumScore = 1;
-        int departmentNumberGenerator = random.nextInt(5) + minimumScore;
-        return departmentNumberGenerator;
-    }
-
-    public int wageValueGenerator() {
-        java.util.Random random = new java.util.Random();
-        int minimumScore = 100_000;
-        int wageValueGenerator = random.nextInt(300_000) + minimumScore;
-        return wageValueGenerator;
-    }
+//    public EmployeeServiceImpl(Map<String, Employee> employeeMap) {
+//        this.employeeMap = employeeMap;
+//    }
 
     public String employeeNameMatches(String anyName) {
         return StringUtils.capitalize(anyName.toLowerCase());
@@ -46,6 +32,7 @@ public class EmployeeServiceImpl implements tel.bvm.EmployeeNameTestWithMavenLib
 //        return anyName.substring(0, 1).toUpperCase() + anyName.substring(1).toLowerCase();
     @Override
     public Map add(String firstName, String lastName, String passwordNumber, Integer yearBirth) {
+        Map<String, Employee> employeeMap = new HashMap<>();
         boolean namesCorrect = StringUtils.isAlpha(firstName) && StringUtils.isAlpha(lastName);
         String idEmployeeInfo = firstName + lastName + passwordNumber;
         if (employeeMap.containsKey(idEmployeeInfo)) {
@@ -54,7 +41,7 @@ public class EmployeeServiceImpl implements tel.bvm.EmployeeNameTestWithMavenLib
             firstName = employeeNameMatches(firstName);
             lastName = employeeNameMatches(lastName);
             idEmployeeInfo = firstName + lastName + passwordNumber;
-            Employee employee = new Employee(firstName, lastName, passwordNumber, yearBirth, wageValueGenerator(), departmentNumberGenerator());
+            Employee employee = new Employee(firstName, lastName, passwordNumber, yearBirth, WageDepartmentGenerator.wageValueGenerator(), WageDepartmentGenerator.departmentNumberGenerator());
             employeeMap.put(idEmployeeInfo, employee);
         } else {
             throw new EmployeeNamesNotCorrect();
@@ -64,14 +51,16 @@ public class EmployeeServiceImpl implements tel.bvm.EmployeeNameTestWithMavenLib
 
     @Override
     public Map addAcceptedEmployees(String firstName, String lastName, String passwordNumber, Integer yearBirth) {
+        Map<String, Employee> employeeMap = new HashMap<>();
         String idEmployeeInfo = firstName + lastName + passwordNumber;
-        Employee employee = new Employee(firstName, lastName, passwordNumber, yearBirth, wageValueGenerator(), departmentNumberGenerator());
+        Employee employee = new Employee(firstName, lastName, passwordNumber, yearBirth, WageDepartmentGenerator.wageValueGenerator(), WageDepartmentGenerator.departmentNumberGenerator());
         employeeMap.put(idEmployeeInfo, employee);
         return employeeMap;
     }
 
     @Override
     public Employee remove(String firstName, String lastName, String passwordNumber) {
+        Map<String, Employee> employeeMap = new HashMap<>();
         String idEmployeeInfo = firstName + lastName + passwordNumber;
         Employee employee = employeeMap.get(idEmployeeInfo);
         if (employee != null) {
@@ -83,6 +72,7 @@ public class EmployeeServiceImpl implements tel.bvm.EmployeeNameTestWithMavenLib
 
     @Override
     public Employee find(String firstName, String lastName, String passwordNumber) {
+        Map<String, Employee> employeeMap = new HashMap<>();
         String idEmployeeInfo = firstName + lastName + passwordNumber;
         Employee employee = employeeMap.get(idEmployeeInfo);
         if (employee != null) {
@@ -94,13 +84,28 @@ public class EmployeeServiceImpl implements tel.bvm.EmployeeNameTestWithMavenLib
 
     @Override
     public Map<String, Employee> allEmployeeInfo() {
+        Map<String, Employee> employeeMap = new HashMap<>();
         return Collections.unmodifiableMap(employeeMap);
     }
 
     @Override
     public Map<String, Employee> getMap() {
+        Map<String, Employee> employeeMap = new HashMap<>();
         return employeeMap;
     }
 }
 
 
+//    public int departmentNumberGenerator() {
+//        java.util.Random random = new java.util.Random();
+//        int minimumScore = 1;
+//        int departmentNumberGenerator = random.nextInt(5) + minimumScore;
+//        return departmentNumberGenerator;
+//    }
+//
+//    public int wageValueGenerator() {
+//        java.util.Random random = new java.util.Random();
+//        int minimumScore = 100_000;
+//        int wageValueGenerator = random.nextInt(300_000) + minimumScore;
+//        return wageValueGenerator;
+//    }
