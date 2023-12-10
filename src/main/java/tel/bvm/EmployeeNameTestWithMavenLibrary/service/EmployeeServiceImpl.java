@@ -20,11 +20,11 @@ import java.util.*;
 @Service
 public class EmployeeServiceImpl implements tel.bvm.EmployeeNameTestWithMavenLibrary.service.EmployeeService {
 
-//    public final Map<String, Employee> employeeMap;
+    public final Map<String, Employee> employeeMap;
 
-//    public EmployeeServiceImpl(Map<String, Employee> employeeMap) {
-//        this.employeeMap = employeeMap;
-//    }
+    public EmployeeServiceImpl(Map<String, Employee> employeeMap) {
+        this.employeeMap = employeeMap;
+    }
 
     public String employeeNameMatches(String anyName) {
         return StringUtils.capitalize(anyName.toLowerCase());
@@ -32,7 +32,7 @@ public class EmployeeServiceImpl implements tel.bvm.EmployeeNameTestWithMavenLib
 //        return anyName.substring(0, 1).toUpperCase() + anyName.substring(1).toLowerCase();
     @Override
     public Map add(String firstName, String lastName, String passwordNumber, Integer yearBirth) {
-        Map<String, Employee> employeeMap = new HashMap<>();
+//        Map<String, Employee> employeeMap = new HashMap<>();
         boolean namesCorrect = StringUtils.isAlpha(firstName) && StringUtils.isAlpha(lastName);
         String idEmployeeInfo = firstName + lastName + passwordNumber;
         if (employeeMap.containsKey(idEmployeeInfo)) {
@@ -60,7 +60,7 @@ public class EmployeeServiceImpl implements tel.bvm.EmployeeNameTestWithMavenLib
 
     @Override
     public Employee remove(String firstName, String lastName, String passwordNumber) {
-        Map<String, Employee> employeeMap = new HashMap<>();
+//        Map<String, Employee> employeeMap = new HashMap<>();
         String idEmployeeInfo = firstName + lastName + passwordNumber;
         Employee employee = employeeMap.get(idEmployeeInfo);
         if (employee != null) {
