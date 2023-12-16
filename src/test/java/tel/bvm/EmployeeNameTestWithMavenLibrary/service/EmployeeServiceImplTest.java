@@ -9,6 +9,7 @@ import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import tel.bvm.EmployeeNameTestWithMavenLibrary.exception.EmployeeAlreadyAddedException;
 import tel.bvm.EmployeeNameTestWithMavenLibrary.scheme.Employee;
 
 import java.util.HashMap;
@@ -141,7 +142,7 @@ public class EmployeeServiceImplTest {
     }
 
     @Test
-    public void getMap() {
+    public void getMapVerify() {
 
         for (Map.Entry<String, Employee> entry : MAP_EMPLOYEE.entrySet()) {
             Employee employee = entry.getValue();
@@ -151,5 +152,28 @@ public class EmployeeServiceImplTest {
         Map<String, Employee> result = employeeService.getMap();
         assertEquals(MAP_EMPLOYEE.size(), result.size());
 //        assertIterableEquals(MAP_EMPLOYEE.values(), result.values());
+    }
+
+    @Test
+    public void addEmployeeAllReadyExceptionVerify() {
+        try (MockedStatic<WageDepartmentGenerator> theMock = Mockito.mockStatic(WageDepartmentGenerator.class)) {
+            theMock.when(WageDepartmentGenerator::departmentNumberGenerator).thenReturn(5);
+            theMock.when(WageDepartmentGenerator::wageValueGenerator).thenReturn(100000);
+
+            Map<String, Employee> excepted = Map.of(idFirst, FIRST_EMPLOYEE);
+            Map<String, Employee> addedEmployee = employeeService.add(
+                    FIRST_EMPLOYEE.getFirstName(),
+                    FIRST_EMPLOYEE.getLastName(),
+                    FIRST_EMPLOYEE.getPasswordNumber(),
+                    FIRST_EMPLOYEE.getYearBirth());
+
+            assertEquals(excepted, addedEmployee);
+
+            Assertions.assertThrows(EmployeeAlreadyAddedException.class, () -> employeeService.add(
+                    FIRST_EMPLOYEE.getFirstName(),
+                    FIRST_EMPLOYEE.getLastName(),
+                    FIRST_EMPLOYEE.getPasswordNumber(),
+                    FIRST_EMPLOYEE.getYearBirth()));
+        }
     }
 }
