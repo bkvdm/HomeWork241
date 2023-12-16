@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
@@ -134,6 +135,7 @@ public class EmployeeServiceImplTest {
             Employee employee = entry.getValue();
             employeeService.add(employee.getFirstName(), employee.getLastName(), employee.getPasswordNumber(), employee.getYearBirth());
         }
+
         Map<String, Employee> result = employeeService.allEmployeeInfo();
         assertNotNull(result);
     }
@@ -141,5 +143,13 @@ public class EmployeeServiceImplTest {
     @Test
     public void getMap() {
 
+        for (Map.Entry<String, Employee> entry : MAP_EMPLOYEE.entrySet()) {
+            Employee employee = entry.getValue();
+            employeeService.add(employee.getFirstName(), employee.getLastName(), employee.getPasswordNumber(), employee.getYearBirth());
+        }
+
+        Map<String, Employee> result = employeeService.getMap();
+        assertEquals(MAP_EMPLOYEE.size(), result.size());
+//        assertIterableEquals(MAP_EMPLOYEE.values(), result.values());
     }
 }
