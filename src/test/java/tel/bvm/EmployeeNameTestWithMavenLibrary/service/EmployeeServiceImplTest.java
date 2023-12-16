@@ -105,6 +105,20 @@ public class EmployeeServiceImplTest {
 
     @Test
     public void findEmployeeVerify() {
+        try (MockedStatic<WageDepartmentGenerator> theMock = Mockito.mockStatic(WageDepartmentGenerator.class)) {
+            theMock.when(WageDepartmentGenerator::departmentNumberGenerator).thenReturn(5);
+            theMock.when(WageDepartmentGenerator::wageValueGenerator).thenReturn(100000);
+
+            Map<String, Employee> excepted = Map.of(idFirst, FIRST_EMPLOYEE);
+            Map<String, Employee> addedEmployee = employeeService.add(
+                    FIRST_EMPLOYEE.getFirstName(),
+                    FIRST_EMPLOYEE.getLastName(),
+                    FIRST_EMPLOYEE.getPasswordNumber(),
+                    FIRST_EMPLOYEE.getYearBirth());
+
+            assertEquals(excepted, addedEmployee);
+        }
+
         Employee employee = employeeService.find(
                 FIRST_EMPLOYEE.getFirstName(),
                 FIRST_EMPLOYEE.getLastName(),
@@ -115,12 +129,12 @@ public class EmployeeServiceImplTest {
 
         @Test
         public void allEmployeeInfoVerify () {
-        Mockito.when(EmployeeService.class)
+        Mockito.when()
 
         }
 
-        @Test
-        public void getMap () {
+    @Test
+    public void getMap() {
 
-        }
     }
+}
