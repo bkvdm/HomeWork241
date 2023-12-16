@@ -21,10 +21,18 @@ import java.util.*;
 public class EmployeeServiceImpl implements tel.bvm.EmployeeNameTestWithMavenLibrary.service.EmployeeService {
 
     public final Map<String, Employee> employeeMap;
+    private final WageDepartmentGenerator wageDepartmentGenerator;
 
-    public EmployeeServiceImpl(Map<String, Employee> employeeMap) {
+//    private final WageDepartmentGenerator wageDepartmentGenerator;
+
+    public EmployeeServiceImpl(Map<String, Employee> employeeMap, WageDepartmentGenerator wageDepartmentGenerator) {
         this.employeeMap = employeeMap;
+        this.wageDepartmentGenerator = wageDepartmentGenerator;
     }
+
+//    public EmployeeServiceImpl(WageDepartmentGenerator wageDepartmentGenerator) {
+//        this.wageDepartmentGenerator = wageDepartmentGenerator;
+//    }
 
     public String employeeNameMatches(String anyName) {
         return StringUtils.capitalize(anyName.toLowerCase());
