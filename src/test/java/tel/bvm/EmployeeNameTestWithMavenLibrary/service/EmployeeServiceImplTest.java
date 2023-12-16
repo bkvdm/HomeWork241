@@ -11,6 +11,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import tel.bvm.EmployeeNameTestWithMavenLibrary.exception.EmployeeAlreadyAddedException;
 import tel.bvm.EmployeeNameTestWithMavenLibrary.exception.EmployeeNamesNotCorrect;
+import tel.bvm.EmployeeNameTestWithMavenLibrary.exception.EmployeeNotFoundException;
 import tel.bvm.EmployeeNameTestWithMavenLibrary.scheme.Employee;
 
 import java.util.HashMap;
@@ -191,5 +192,25 @@ public class EmployeeServiceImplTest {
                 FIRST_EMPLOYEE.getPasswordNumber(),
                 FIRST_EMPLOYEE.getYearBirth()));
     }
+    @Test
+    public void employeeNotFoundException() {
+        try (MockedStatic<WageDepartmentGenerator> theMock = Mockito.mockStatic(WageDepartmentGenerator.class)) {
+            theMock.when(WageDepartmentGenerator::departmentNumberGenerator).thenReturn(5);
+            theMock.when(WageDepartmentGenerator::wageValueGenerator).thenReturn(100000);
 
+            Map<String, Employee> excepted = Map.of(idFirst, FIRST_EMPLOYEE);
+            Map<String, Employee> addedEmployee = employeeService.add(
+                    FIRST_EMPLOYEE.getFirstName(),
+                    FIRST_EMPLOYEE.getLastName(),
+                    FIRST_EMPLOYEE.getPasswordNumber(),
+                    FIRST_EMPLOYEE.getYearBirth());
+
+            assertEquals(excepted, addedEmployee);
+        }
+
+        Assertions.assertThrows(EmployeeNotFoundException.class, () -> employeeService.find(
+                SIX_EMPLOYEE.getFirstName(),
+                SIX_EMPLOYEE.getLastName(),
+                SIX_EMPLOYEE.getPasswordNumber()));
+    }
 }
