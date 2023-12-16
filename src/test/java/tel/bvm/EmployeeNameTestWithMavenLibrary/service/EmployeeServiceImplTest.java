@@ -13,9 +13,9 @@ import tel.bvm.EmployeeNameTestWithMavenLibrary.scheme.Employee;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertIterableEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 import static tel.bvm.EmployeeNameTestWithMavenLibrary.constants.EmployeeConstants.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -127,11 +127,16 @@ public class EmployeeServiceImplTest {
         assertEquals(FIRST_EMPLOYEE, employee);
     }
 
-        @Test
-        public void allEmployeeInfoVerify () {
-        Mockito.when()
+    @Test
+    public void allEmployeeInfoVerify() {
 
+        for (Map.Entry<String, Employee> entry : MAP_EMPLOYEE.entrySet()) {
+            Employee employee = entry.getValue();
+            employeeService.add(employee.getFirstName(), employee.getLastName(), employee.getPasswordNumber(), employee.getYearBirth());
         }
+        Map<String, Employee> result = employeeService.allEmployeeInfo();
+        assertNotNull(result);
+    }
 
     @Test
     public void getMap() {
