@@ -10,6 +10,7 @@ import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import tel.bvm.EmployeeNameTestWithMavenLibrary.exception.EmployeeAlreadyAddedException;
+import tel.bvm.EmployeeNameTestWithMavenLibrary.exception.EmployeeNamesNotCorrect;
 import tel.bvm.EmployeeNameTestWithMavenLibrary.scheme.Employee;
 
 import java.util.HashMap;
@@ -176,4 +177,19 @@ public class EmployeeServiceImplTest {
                     FIRST_EMPLOYEE.getYearBirth()));
         }
     }
+    @Test
+    public void employeeNamesNotCorrectExceptionVerify() {
+        Assertions.assertThrows(EmployeeNamesNotCorrect.class, () -> employeeService.add(
+                "#",
+                "1",
+                FIRST_EMPLOYEE.getPasswordNumber(),
+                FIRST_EMPLOYEE.getYearBirth()));
+
+        Assertions.assertThrows(EmployeeNamesNotCorrect.class, () -> employeeService.add(
+                "1",
+                "#",
+                FIRST_EMPLOYEE.getPasswordNumber(),
+                FIRST_EMPLOYEE.getYearBirth()));
+    }
+
 }
