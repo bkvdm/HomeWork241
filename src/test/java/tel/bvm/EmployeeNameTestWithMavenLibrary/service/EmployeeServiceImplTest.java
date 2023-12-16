@@ -46,12 +46,6 @@ public class EmployeeServiceImplTest {
 
     @Test
     public void addEmployeeVerify() {
-        try (MockedStatic<WageDepartmentGenerator> theMock = Mockito.mockStatic(WageDepartmentGenerator.class)) {
-            theMock.when(WageDepartmentGenerator::departmentNumberGenerator).thenReturn(1);
-        }
-        try (MockedStatic<WageDepartmentGenerator> theMock = Mockito.mockStatic(WageDepartmentGenerator.class)) {
-            theMock.when(WageDepartmentGenerator::wageValueGenerator).thenReturn(100000);
-        }
 
 //        Mockito.when(FIRST_EMPLOYEE.getDepartmentNumber()).thenReturn(1);
 //        Mockito.when(FIRST_EMPLOYEE.getDepartmentNumber()).thenReturn(100000);
@@ -61,9 +55,33 @@ public class EmployeeServiceImplTest {
                 FIRST_EMPLOYEE.getLastName(),
                 FIRST_EMPLOYEE.getPasswordNumber(),
                 FIRST_EMPLOYEE.getYearBirth());
+        try (MockedStatic<WageDepartmentGenerator> theMock = Mockito.mockStatic(WageDepartmentGenerator.class)) {
+            theMock.when(WageDepartmentGenerator::departmentNumberGenerator).thenReturn(5);
+        }
+        try (MockedStatic<WageDepartmentGenerator> theMock = Mockito.mockStatic(WageDepartmentGenerator.class)) {
+            theMock.when(WageDepartmentGenerator::wageValueGenerator).thenReturn(100000);
+        }
+
         assertEquals(excepted.size(), addedEmployee.size());
         assertEquals(excepted.keySet(), addedEmployee.keySet());
-        assertEquals(excepted.values(), addedEmployee.values());
+//        assertEquals(excepted.values(), addedEmployee.values());
+    }
+
+    @Test
+    public void addEmployeeVerifyCheckNameCorrect() {
+        try (MockedStatic<WageDepartmentGenerator> theMock = Mockito.mockStatic(WageDepartmentGenerator.class)) {
+            theMock.when(WageDepartmentGenerator::departmentNumberGenerator).thenReturn(5);
+            theMock.when(WageDepartmentGenerator::wageValueGenerator).thenReturn(100000);
+
+            Map<String, Employee> excepted = Map.of(idFirst, FIRST_EMPLOYEE);
+            Map<String, Employee> addedEmployee = employeeService.add(
+                    FIRST_EMPLOYEE.getFirstName(),
+                    FIRST_EMPLOYEE.getLastName(),
+                    FIRST_EMPLOYEE.getPasswordNumber(),
+                    FIRST_EMPLOYEE.getYearBirth());
+
+            assertEquals(excepted, addedEmployee);
+        }
     }
 
     @Test
@@ -81,6 +99,23 @@ public class EmployeeServiceImplTest {
                 FIRST_EMPLOYEE.getPasswordNumber()
         );
         assertEquals(0, employeeService.getMap().size());
+    }
+
+    @Test
+    public void CheckAbsentEmployeeRemoveException() {
+        Map<String, Employee> excepted = Map.of(idFirst, FIRST_EMPLOYEE);
+        Map<String, Employee> addedEmployee = employeeService.add(
+                FIRST_EMPLOYEE.getFirstName(),
+                FIRST_EMPLOYEE.getLastName(),
+                FIRST_EMPLOYEE.getPasswordNumber(),
+                FIRST_EMPLOYEE.getYearBirth());
+        assertEquals(excepted.size(), addedEmployee.size());
+        employeeService.remove(
+                SECOND_EMPLOYEE.getFirstName(),
+                SECOND_EMPLOYEE.getLastName(),
+                SECOND_EMPLOYEE.getPasswordNumber()
+        );
+        assertEquals(1, employeeService.getMap().size());
     }
 
     @Test
