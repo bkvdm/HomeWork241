@@ -80,7 +80,7 @@ public class EmployeeServiceImpl implements tel.bvm.EmployeeNameTestWithMavenLib
 
     @Override
     public Employee find(String firstName, String lastName, String passwordNumber) {
-        Map<String, Employee> employeeMap = new HashMap<>();
+//        Map<String, Employee> employeeMap = new HashMap<>();
         String idEmployeeInfo = firstName + lastName + passwordNumber;
         Employee employee = employeeMap.get(idEmployeeInfo);
         if (employee != null) {
@@ -92,7 +92,7 @@ public class EmployeeServiceImpl implements tel.bvm.EmployeeNameTestWithMavenLib
 
     @Override
     public Map<String, Employee> allEmployeeInfo() {
-        Map<String, Employee> employeeMap = new HashMap<>();
+//        Map<String, Employee> employeeMap = new HashMap<>();
         return Collections.unmodifiableMap(employeeMap);
     }
 

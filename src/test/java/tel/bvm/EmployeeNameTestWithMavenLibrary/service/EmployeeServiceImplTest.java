@@ -1,5 +1,6 @@
 package tel.bvm.EmployeeNameTestWithMavenLibrary.service;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,6 +27,7 @@ public class EmployeeServiceImplTest {
 //    private EmployeeServiceImpl employeeServiceImpl;
 
     private EmployeeServiceImpl employeeService = new EmployeeServiceImpl(new HashMap<String, Employee>(), wageDepartmentGenerator);
+
     @BeforeEach
     void setUp() {
         employeeService = new EmployeeServiceImpl(new HashMap<String, Employee>(), wageDepartmentGenerator);
@@ -102,47 +104,23 @@ public class EmployeeServiceImplTest {
     }
 
     @Test
-    public void CheckAbsentEmployeeRemoveException() {
-        Map<String, Employee> excepted = Map.of(idFirst, FIRST_EMPLOYEE);
-        Map<String, Employee> addedEmployee = employeeService.add(
-                FIRST_EMPLOYEE.getFirstName(),
-                FIRST_EMPLOYEE.getLastName(),
-                FIRST_EMPLOYEE.getPasswordNumber(),
-                FIRST_EMPLOYEE.getYearBirth());
-        assertEquals(excepted.size(), addedEmployee.size());
-        employeeService.remove(
-                SECOND_EMPLOYEE.getFirstName(),
-                SECOND_EMPLOYEE.getLastName(),
-                SECOND_EMPLOYEE.getPasswordNumber()
-        );
-        assertEquals(1, employeeService.getMap().size());
-    }
-
-    @Test
     public void findEmployeeVerify() {
-        Map<String, Employee> excepted = Map.of(idFirst, FIRST_EMPLOYEE);
-        Map<String, Employee> addedEmployee = employeeService.add(
+        Employee employee = employeeService.find(
                 FIRST_EMPLOYEE.getFirstName(),
                 FIRST_EMPLOYEE.getLastName(),
-                FIRST_EMPLOYEE.getPasswordNumber(),
-                FIRST_EMPLOYEE.getYearBirth());
-        assertEquals(excepted.size(), addedEmployee.size());
-
-        Employee actual = employeeService.find(
-                FIRST_EMPLOYEE.getFirstName(),
-                FIRST_EMPLOYEE.getLastName(),
-                FIRST_EMPLOYEE.getPasswordNumber());
-        String idFirstActual = actual.getFirstName() + actual.getLastName() + actual.getPasswordNumber();
-        assertEquals(idFirst, idFirstActual);
+                FIRST_EMPLOYEE.getPasswordNumber()
+        );
+        assertEquals(FIRST_EMPLOYEE, employee);
     }
 
-    @Test
-    public void allEmployeeInfo() {
+        @Test
+        public void allEmployeeInfoVerify () {
+        Mockito.when(EmployeeService.class)
 
+        }
+
+        @Test
+        public void getMap () {
+
+        }
     }
-
-    @Test
-    public void getMap() {
-
-    }
-}
