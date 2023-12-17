@@ -148,7 +148,10 @@ public class EmployeeServiceImplTest {
 
         for (Map.Entry<String, Employee> entry : MAP_EMPLOYEE.entrySet()) {
             Employee employee = entry.getValue();
-            employeeService.add(employee.getFirstName(), employee.getLastName(), employee.getPasswordNumber(), employee.getYearBirth());
+            employeeService.add(employee.getFirstName(),
+                    employee.getLastName(),
+                    employee.getPasswordNumber(),
+                    employee.getYearBirth());
         }
 
         Map<String, Employee> result = employeeService.getMap();
