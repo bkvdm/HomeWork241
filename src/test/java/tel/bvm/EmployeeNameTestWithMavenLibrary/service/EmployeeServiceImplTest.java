@@ -28,8 +28,6 @@ public class EmployeeServiceImplTest {
     @Mock
     public WageDepartmentGenerator wageDepartmentGenerator;
 
-//    private EmployeeServiceImpl employeeServiceImpl;
-
     private EmployeeServiceImpl employeeService = new EmployeeServiceImpl(new HashMap<String, Employee>(), wageDepartmentGenerator);
 
     @BeforeEach
@@ -37,24 +35,9 @@ public class EmployeeServiceImplTest {
         employeeService = new EmployeeServiceImpl(new HashMap<String, Employee>(), wageDepartmentGenerator);
     }
 
-    //        assertFalse(employeeService.findAll().contains(FIRST_EMPLOYEE));
-
-//    void lookMomICanMockStaticMethods() {
-//        assertThat(Buddy.name()).isEqualTo("John");
-//
-//        try (MockedStatic<Buddy> theMock = Mockito.mockStatic(Buddy.class)) {
-//            theMock.when(Buddy::name).thenReturn("Rafael");
-//            assertThat(Buddy.name()).isEqualTo("Rafael");
-//        }
-//
-//        assertThat(Buddy.name()).isEqualTo("John");
-//    }
-
     @Test
     public void addEmployeeVerify() {
 
-//        Mockito.when(FIRST_EMPLOYEE.getDepartmentNumber()).thenReturn(1);
-//        Mockito.when(FIRST_EMPLOYEE.getDepartmentNumber()).thenReturn(100000);
         Map<String, Employee> excepted = Map.of(idFirst, FIRST_EMPLOYEE);
         Map<String, Employee> addedEmployee = employeeService.add(
                 FIRST_EMPLOYEE.getFirstName(),
@@ -70,7 +53,6 @@ public class EmployeeServiceImplTest {
 
         assertEquals(excepted.size(), addedEmployee.size());
         assertEquals(excepted.keySet(), addedEmployee.keySet());
-//        assertEquals(excepted.values(), addedEmployee.values());
     }
 
     @Test
@@ -156,7 +138,6 @@ public class EmployeeServiceImplTest {
 
         Map<String, Employee> result = employeeService.getMap();
         assertEquals(MAP_EMPLOYEE.size(), result.size());
-//        assertIterableEquals(MAP_EMPLOYEE.values(), result.values());
     }
 
     @Test
