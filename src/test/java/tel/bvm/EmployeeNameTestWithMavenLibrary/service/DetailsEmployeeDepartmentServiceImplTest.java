@@ -41,7 +41,7 @@ public class DetailsEmployeeDepartmentServiceImplTest {
             employeeService.add(employee.getFirstName(), employee.getLastName(), employee.getPasswordNumber(), employee.getYearBirth());
         }
 
-        Employee employeeWithMaxWageDepartment = 
+//        Employee employeeWithMaxWageDepartment =
 
     }
 }

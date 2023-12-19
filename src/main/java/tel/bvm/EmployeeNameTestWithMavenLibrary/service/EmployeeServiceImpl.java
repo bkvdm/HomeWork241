@@ -49,7 +49,7 @@ public class EmployeeServiceImpl implements tel.bvm.EmployeeNameTestWithMavenLib
             firstName = employeeNameMatches(firstName);
             lastName = employeeNameMatches(lastName);
             idEmployeeInfo = firstName + lastName + passwordNumber;
-            Employee employee = new Employee(firstName, lastName, passwordNumber, yearBirth, WageDepartmentGenerator.wageValueGenerator(), WageDepartmentGenerator.departmentNumberGenerator());
+            Employee employee = new Employee(firstName, lastName, passwordNumber, yearBirth, wageDepartmentGenerator.wageValueGenerator(), wageDepartmentGenerator.departmentNumberGenerator());
             employeeMap.put(idEmployeeInfo, employee);
         } else {
             throw new EmployeeNamesNotCorrect();
@@ -61,7 +61,7 @@ public class EmployeeServiceImpl implements tel.bvm.EmployeeNameTestWithMavenLib
     public Map addAcceptedEmployees(String firstName, String lastName, String passwordNumber, Integer yearBirth) {
         Map<String, Employee> employeeMap = new HashMap<>();
         String idEmployeeInfo = firstName + lastName + passwordNumber;
-        Employee employee = new Employee(firstName, lastName, passwordNumber, yearBirth, WageDepartmentGenerator.wageValueGenerator(), WageDepartmentGenerator.departmentNumberGenerator());
+        Employee employee = new Employee(firstName, lastName, passwordNumber, yearBirth, wageDepartmentGenerator.wageValueGenerator(), wageDepartmentGenerator.departmentNumberGenerator());
         employeeMap.put(idEmployeeInfo, employee);
         return employeeMap;
     }

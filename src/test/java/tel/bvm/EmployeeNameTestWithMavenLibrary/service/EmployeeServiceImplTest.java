@@ -28,15 +28,18 @@ public class EmployeeServiceImplTest {
     @Mock
     public WageDepartmentGenerator wageDepartmentGenerator;
 
-    private EmployeeServiceImpl employeeService = new EmployeeServiceImpl(new HashMap<String, Employee>(), wageDepartmentGenerator);
+    private EmployeeServiceImpl employeeService;
 
     @BeforeEach
     void setUp() {
         employeeService = new EmployeeServiceImpl(new HashMap<String, Employee>(), wageDepartmentGenerator);
+//        employeeService = new EmployeeServiceImpl(new HashMap<String, Employee>(), new WageDepartmentGenerator());
     }
 
     @Test
     public void addEmployeeVerify() {
+        when(wageDepartmentGenerator.departmentNumberGenerator()).thenReturn(5);
+        when(wageDepartmentGenerator.wageValueGenerator()).thenReturn(100000);
 
         Map<String, Employee> excepted = Map.of(idFirst, FIRST_EMPLOYEE);
         Map<String, Employee> addedEmployee = employeeService.add(
@@ -44,12 +47,6 @@ public class EmployeeServiceImplTest {
                 FIRST_EMPLOYEE.getLastName(),
                 FIRST_EMPLOYEE.getPasswordNumber(),
                 FIRST_EMPLOYEE.getYearBirth());
-        try (MockedStatic<WageDepartmentGenerator> theMock = Mockito.mockStatic(WageDepartmentGenerator.class)) {
-            theMock.when(WageDepartmentGenerator::departmentNumberGenerator).thenReturn(5);
-        }
-        try (MockedStatic<WageDepartmentGenerator> theMock = Mockito.mockStatic(WageDepartmentGenerator.class)) {
-            theMock.when(WageDepartmentGenerator::wageValueGenerator).thenReturn(100000);
-        }
 
         assertEquals(excepted.size(), addedEmployee.size());
         assertEquals(excepted.keySet(), addedEmployee.keySet());
@@ -57,19 +54,17 @@ public class EmployeeServiceImplTest {
 
     @Test
     public void addEmployeeVerifyCheckNameCorrect() {
-        try (MockedStatic<WageDepartmentGenerator> theMock = Mockito.mockStatic(WageDepartmentGenerator.class)) {
-            theMock.when(WageDepartmentGenerator::departmentNumberGenerator).thenReturn(5);
-            theMock.when(WageDepartmentGenerator::wageValueGenerator).thenReturn(100000);
+        when(wageDepartmentGenerator.departmentNumberGenerator()).thenReturn(5);
+        when(wageDepartmentGenerator.wageValueGenerator()).thenReturn(100000);
 
-            Map<String, Employee> excepted = Map.of(idFirst, FIRST_EMPLOYEE);
-            Map<String, Employee> addedEmployee = employeeService.add(
-                    FIRST_EMPLOYEE.getFirstName(),
-                    FIRST_EMPLOYEE.getLastName(),
-                    FIRST_EMPLOYEE.getPasswordNumber(),
-                    FIRST_EMPLOYEE.getYearBirth());
+        Map<String, Employee> excepted = Map.of(idFirst, FIRST_EMPLOYEE);
+        Map<String, Employee> addedEmployee = employeeService.add(
+                FIRST_EMPLOYEE.getFirstName(),
+                FIRST_EMPLOYEE.getLastName(),
+                FIRST_EMPLOYEE.getPasswordNumber(),
+                FIRST_EMPLOYEE.getYearBirth());
 
-            assertEquals(excepted, addedEmployee);
-        }
+        assertEquals(excepted, addedEmployee);
     }
 
     @Test
@@ -91,19 +86,17 @@ public class EmployeeServiceImplTest {
 
     @Test
     public void findEmployeeVerify() {
-        try (MockedStatic<WageDepartmentGenerator> theMock = Mockito.mockStatic(WageDepartmentGenerator.class)) {
-            theMock.when(WageDepartmentGenerator::departmentNumberGenerator).thenReturn(5);
-            theMock.when(WageDepartmentGenerator::wageValueGenerator).thenReturn(100000);
+        when(wageDepartmentGenerator.departmentNumberGenerator()).thenReturn(5);
+        when(wageDepartmentGenerator.wageValueGenerator()).thenReturn(100000);
 
-            Map<String, Employee> excepted = Map.of(idFirst, FIRST_EMPLOYEE);
-            Map<String, Employee> addedEmployee = employeeService.add(
-                    FIRST_EMPLOYEE.getFirstName(),
-                    FIRST_EMPLOYEE.getLastName(),
-                    FIRST_EMPLOYEE.getPasswordNumber(),
-                    FIRST_EMPLOYEE.getYearBirth());
+        Map<String, Employee> excepted = Map.of(idFirst, FIRST_EMPLOYEE);
+        Map<String, Employee> addedEmployee = employeeService.add(
+                FIRST_EMPLOYEE.getFirstName(),
+                FIRST_EMPLOYEE.getLastName(),
+                FIRST_EMPLOYEE.getPasswordNumber(),
+                FIRST_EMPLOYEE.getYearBirth());
 
-            assertEquals(excepted, addedEmployee);
-        }
+        assertEquals(excepted, addedEmployee);
 
         Employee employee = employeeService.find(
                 FIRST_EMPLOYEE.getFirstName(),
@@ -142,26 +135,25 @@ public class EmployeeServiceImplTest {
 
     @Test
     public void addEmployeeAllReadyExceptionVerify() {
-        try (MockedStatic<WageDepartmentGenerator> theMock = Mockito.mockStatic(WageDepartmentGenerator.class)) {
-            theMock.when(WageDepartmentGenerator::departmentNumberGenerator).thenReturn(5);
-            theMock.when(WageDepartmentGenerator::wageValueGenerator).thenReturn(100000);
+        when(wageDepartmentGenerator.departmentNumberGenerator()).thenReturn(5);
+        when(wageDepartmentGenerator.wageValueGenerator()).thenReturn(100000);
 
-            Map<String, Employee> excepted = Map.of(idFirst, FIRST_EMPLOYEE);
-            Map<String, Employee> addedEmployee = employeeService.add(
-                    FIRST_EMPLOYEE.getFirstName(),
-                    FIRST_EMPLOYEE.getLastName(),
-                    FIRST_EMPLOYEE.getPasswordNumber(),
-                    FIRST_EMPLOYEE.getYearBirth());
+        Map<String, Employee> excepted = Map.of(idFirst, FIRST_EMPLOYEE);
+        Map<String, Employee> addedEmployee = employeeService.add(
+                FIRST_EMPLOYEE.getFirstName(),
+                FIRST_EMPLOYEE.getLastName(),
+                FIRST_EMPLOYEE.getPasswordNumber(),
+                FIRST_EMPLOYEE.getYearBirth());
 
-            assertEquals(excepted, addedEmployee);
+        assertEquals(excepted, addedEmployee);
 
-            Assertions.assertThrows(EmployeeAlreadyAddedException.class, () -> employeeService.add(
-                    FIRST_EMPLOYEE.getFirstName(),
-                    FIRST_EMPLOYEE.getLastName(),
-                    FIRST_EMPLOYEE.getPasswordNumber(),
-                    FIRST_EMPLOYEE.getYearBirth()));
-        }
+        Assertions.assertThrows(EmployeeAlreadyAddedException.class, () -> employeeService.add(
+                FIRST_EMPLOYEE.getFirstName(),
+                FIRST_EMPLOYEE.getLastName(),
+                FIRST_EMPLOYEE.getPasswordNumber(),
+                FIRST_EMPLOYEE.getYearBirth()));
     }
+
     @Test
     public void employeeNamesNotCorrectExceptionVerify() {
         Assertions.assertThrows(EmployeeNamesNotCorrect.class, () -> employeeService.add(
@@ -176,21 +168,20 @@ public class EmployeeServiceImplTest {
                 FIRST_EMPLOYEE.getPasswordNumber(),
                 FIRST_EMPLOYEE.getYearBirth()));
     }
+
     @Test
     public void employeeNotFoundException() {
-        try (MockedStatic<WageDepartmentGenerator> theMock = Mockito.mockStatic(WageDepartmentGenerator.class)) {
-            theMock.when(WageDepartmentGenerator::departmentNumberGenerator).thenReturn(5);
-            theMock.when(WageDepartmentGenerator::wageValueGenerator).thenReturn(100000);
+        when(wageDepartmentGenerator.departmentNumberGenerator()).thenReturn(5);
+        when(wageDepartmentGenerator.wageValueGenerator()).thenReturn(100000);
 
-            Map<String, Employee> excepted = Map.of(idFirst, FIRST_EMPLOYEE);
-            Map<String, Employee> addedEmployee = employeeService.add(
-                    FIRST_EMPLOYEE.getFirstName(),
-                    FIRST_EMPLOYEE.getLastName(),
-                    FIRST_EMPLOYEE.getPasswordNumber(),
-                    FIRST_EMPLOYEE.getYearBirth());
+        Map<String, Employee> excepted = Map.of(idFirst, FIRST_EMPLOYEE);
+        Map<String, Employee> addedEmployee = employeeService.add(
+                FIRST_EMPLOYEE.getFirstName(),
+                FIRST_EMPLOYEE.getLastName(),
+                FIRST_EMPLOYEE.getPasswordNumber(),
+                FIRST_EMPLOYEE.getYearBirth());
 
-            assertEquals(excepted, addedEmployee);
-        }
+        assertEquals(excepted, addedEmployee);
 
         Assertions.assertThrows(EmployeeNotFoundException.class, () -> employeeService.find(
                 SIX_EMPLOYEE.getFirstName(),
