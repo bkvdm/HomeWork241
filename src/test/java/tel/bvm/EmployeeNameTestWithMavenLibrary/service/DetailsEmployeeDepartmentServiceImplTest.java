@@ -25,7 +25,7 @@ public class DetailsEmployeeDepartmentServiceImplTest {
     @BeforeEach
     void initOut() {
         when(serviceMockEmployee.getMap()).thenReturn(MAP_EMPLOYEE);
-        DetailsEmployeeDepartmentServiceImpl out = new DetailsEmployeeDepartmentServiceImpl(EmployeeServiceImpl employeeService);
+        DetailsEmployeeDepartmentServiceImpl out = new DetailsEmployeeDepartmentServiceImpl(serviceMockEmployee);
 
 
 
