@@ -22,11 +22,10 @@ public class DetailsEmployeeDepartmentServiceImplTest {
     @Mock
     private EmployeeServiceImpl serviceMockEmployee;
 
-    private EmployeeServiceImpl out;
-
     @BeforeEach
     void initOut() {
-        out = new EmployeeServiceImpl(MAP_EMPLOYEE, );
+        when(serviceMockEmployee.getMap()).thenReturn(MAP_EMPLOYEE);
+        DetailsEmployeeDepartmentServiceImpl out = new DetailsEmployeeDepartmentServiceImpl(EmployeeServiceImpl employeeService);
 
 
 
@@ -56,11 +55,25 @@ public class DetailsEmployeeDepartmentServiceImplTest {
 
         for (Map.Entry<String, Employee> entry : MAP_EMPLOYEE.entrySet()) {
             Employee employee = entry.getValue();
-            employeeService.add(employee.getFirstName(),
+            serviceMockEmployee.add(employee.getFirstName(),
                     employee.getLastName(),
                     employee.getPasswordNumber(),
                     employee.getYearBirth());
         }
+
+//        Employee employeeWithMaxWageDepartment =
+
+    }
+//    @Test
+//    public void maxWageDepartmentVerify() {
+//
+//        for (Map.Entry<String, Employee> entry : MAP_EMPLOYEE.entrySet()) {
+//            Employee employee = entry.getValue();
+//            serviceMockEmployee.add(employee.getFirstName(),
+//                    employee.getLastName(),
+//                    employee.getPasswordNumber(),
+//                    employee.getYearBirth());
+//        }
 
 //        Employee employeeWithMaxWageDepartment =
 
