@@ -2,8 +2,6 @@ package tel.bvm.EmployeeNameTestWithMavenLibrary.constants;
 
 import tel.bvm.EmployeeNameTestWithMavenLibrary.scheme.Employee;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class EmployeeConstants {
@@ -15,12 +13,12 @@ public class EmployeeConstants {
     public static final Employee FIVE_EMPLOYEE = new Employee("Тимофеев", "Тимофей", "303030303", 1995, 500000, 1);
     public static final Employee SIX_EMPLOYEE = new Employee("Маруся", "Смирнова", "123", 2000, 500000, 6);
 
-    public static final String idFirst = FIRST_EMPLOYEE.getFirstName() + FIRST_EMPLOYEE.getLastName() + FIRST_EMPLOYEE.getPasswordNumber();
-    public static final String idSecond = SECOND_EMPLOYEE.getFirstName() + SECOND_EMPLOYEE.getLastName() + SECOND_EMPLOYEE.getPasswordNumber();
-    public static final String idThree = THREE_EMPLOYEE.getFirstName() + THREE_EMPLOYEE.getLastName() + THREE_EMPLOYEE.getPasswordNumber();
-    public static final String idFour = FOUR_EMPLOYEE.getFirstName() + FOUR_EMPLOYEE.getLastName() + FOUR_EMPLOYEE.getPasswordNumber();
-    public static final String idFive = FIVE_EMPLOYEE.getFirstName() + FIVE_EMPLOYEE.getLastName() + FIVE_EMPLOYEE.getPasswordNumber();
-    public static final String idSix = SIX_EMPLOYEE.getFirstName() + SIX_EMPLOYEE.getLastName() + SIX_EMPLOYEE.getPasswordNumber();
+    public static final String ID_FIRST = FIRST_EMPLOYEE.getFirstName() + FIRST_EMPLOYEE.getLastName() + FIRST_EMPLOYEE.getPasswordNumber();
+    public static final String ID_SECOND = SECOND_EMPLOYEE.getFirstName() + SECOND_EMPLOYEE.getLastName() + SECOND_EMPLOYEE.getPasswordNumber();
+    public static final String ID_THREE = THREE_EMPLOYEE.getFirstName() + THREE_EMPLOYEE.getLastName() + THREE_EMPLOYEE.getPasswordNumber();
+    public static final String ID_FOUR = FOUR_EMPLOYEE.getFirstName() + FOUR_EMPLOYEE.getLastName() + FOUR_EMPLOYEE.getPasswordNumber();
+    public static final String ID_FIVE = FIVE_EMPLOYEE.getFirstName() + FIVE_EMPLOYEE.getLastName() + FIVE_EMPLOYEE.getPasswordNumber();
+    public static final String ID_SIX = SIX_EMPLOYEE.getFirstName() + SIX_EMPLOYEE.getLastName() + SIX_EMPLOYEE.getPasswordNumber();
 
 
 

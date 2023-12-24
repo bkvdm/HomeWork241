@@ -4,10 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mock;
-import org.mockito.MockedStatic;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import tel.bvm.EmployeeNameTestWithMavenLibrary.exception.EmployeeAlreadyAddedException;
 import tel.bvm.EmployeeNameTestWithMavenLibrary.exception.EmployeeNamesNotCorrect;
@@ -41,7 +38,7 @@ public class EmployeeServiceImplTest {
         when(wageDepartmentGenerator.departmentNumberGenerator()).thenReturn(5);
         when(wageDepartmentGenerator.wageValueGenerator()).thenReturn(100000);
 
-        Map<String, Employee> excepted = Map.of(idFirst, FIRST_EMPLOYEE);
+        Map<String, Employee> excepted = Map.of(ID_FIRST, FIRST_EMPLOYEE);
         Map<String, Employee> addedEmployee = employeeService.add(
                 FIRST_EMPLOYEE.getFirstName(),
                 FIRST_EMPLOYEE.getLastName(),
@@ -57,7 +54,7 @@ public class EmployeeServiceImplTest {
         when(wageDepartmentGenerator.departmentNumberGenerator()).thenReturn(5);
         when(wageDepartmentGenerator.wageValueGenerator()).thenReturn(100000);
 
-        Map<String, Employee> excepted = Map.of(idFirst, FIRST_EMPLOYEE);
+        Map<String, Employee> excepted = Map.of(ID_FIRST, FIRST_EMPLOYEE);
         Map<String, Employee> addedEmployee = employeeService.add(
                 FIRST_EMPLOYEE.getFirstName(),
                 FIRST_EMPLOYEE.getLastName(),
@@ -69,7 +66,7 @@ public class EmployeeServiceImplTest {
 
     @Test
     public void removeEmployeeVerify() {
-        Map<String, Employee> excepted = Map.of(idFirst, FIRST_EMPLOYEE);
+        Map<String, Employee> excepted = Map.of(ID_FIRST, FIRST_EMPLOYEE);
         Map<String, Employee> addedEmployee = employeeService.add(
                 FIRST_EMPLOYEE.getFirstName(),
                 FIRST_EMPLOYEE.getLastName(),
@@ -89,7 +86,7 @@ public class EmployeeServiceImplTest {
         when(wageDepartmentGenerator.departmentNumberGenerator()).thenReturn(5);
         when(wageDepartmentGenerator.wageValueGenerator()).thenReturn(100000);
 
-        Map<String, Employee> excepted = Map.of(idFirst, FIRST_EMPLOYEE);
+        Map<String, Employee> excepted = Map.of(ID_FIRST, FIRST_EMPLOYEE);
         Map<String, Employee> addedEmployee = employeeService.add(
                 FIRST_EMPLOYEE.getFirstName(),
                 FIRST_EMPLOYEE.getLastName(),
@@ -138,7 +135,7 @@ public class EmployeeServiceImplTest {
         when(wageDepartmentGenerator.departmentNumberGenerator()).thenReturn(5);
         when(wageDepartmentGenerator.wageValueGenerator()).thenReturn(100000);
 
-        Map<String, Employee> excepted = Map.of(idFirst, FIRST_EMPLOYEE);
+        Map<String, Employee> excepted = Map.of(ID_FIRST, FIRST_EMPLOYEE);
         Map<String, Employee> addedEmployee = employeeService.add(
                 FIRST_EMPLOYEE.getFirstName(),
                 FIRST_EMPLOYEE.getLastName(),
@@ -174,7 +171,7 @@ public class EmployeeServiceImplTest {
         when(wageDepartmentGenerator.departmentNumberGenerator()).thenReturn(5);
         when(wageDepartmentGenerator.wageValueGenerator()).thenReturn(100000);
 
-        Map<String, Employee> excepted = Map.of(idFirst, FIRST_EMPLOYEE);
+        Map<String, Employee> excepted = Map.of(ID_FIRST, FIRST_EMPLOYEE);
         Map<String, Employee> addedEmployee = employeeService.add(
                 FIRST_EMPLOYEE.getFirstName(),
                 FIRST_EMPLOYEE.getLastName(),

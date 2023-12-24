@@ -22,26 +22,67 @@ public class DetailsEmployeeDepartmentServiceImplTest {
     @Mock
     private EmployeeServiceImpl serviceMockEmployee;
 
-    private DetailsEmployeeDepartmentServiceImpl serviceMockDetailsDepartment;
-    public WageDepartmentGenerator wageDepartmentGenerator;
-    private final EmployeeServiceImpl employeeService = new EmployeeServiceImpl(new HashMap<String, Employee>(), wageDepartmentGenerator);
-
-
+    private EmployeeServiceImpl out;
 
     @BeforeEach
-    void setUp() {
-        DetailsEmployeeDepartmentService out = new DetailsEmployeeDepartmentServiceImpl(serviceMockEmployee);
-    }
+    void initOut() {
+        out = new EmployeeServiceImpl(MAP_EMPLOYEE, );
+
+
+
+
+        //        DetailsEmployeeDepartmentServiceImpl detailsEmployeeDepartmentService = new DetailsEmployeeDepartmentServiceImpl(new HashMap<String, Employee>);
+//    }
+
+
+////
+//    EmployeeService employeeService;
+//    //
+//
+//    private DetailsEmployeeDepartmentServiceImpl serviceMockDetailsDepartment;
+////    public WageDepartmentGenerator wageDepartmentGenerator;
+////    private final EmployeeServiceImpl employeeService;
+//
+//    @BeforeEach
+//    void setUp() {
+//
+//        EmployeeServiceImpl new employeeServiceImpl;
+
+//        serviceMockDetailsDepartment = new DetailsEmployeeDepartmentServiceImpl(serviceMockEmployee);
+}
 
     @Test
     public void maxWageDepartmentVerify() {
 
         for (Map.Entry<String, Employee> entry : MAP_EMPLOYEE.entrySet()) {
             Employee employee = entry.getValue();
-            employeeService.add(employee.getFirstName(), employee.getLastName(), employee.getPasswordNumber(), employee.getYearBirth());
+            employeeService.add(employee.getFirstName(),
+                    employee.getLastName(),
+                    employee.getPasswordNumber(),
+                    employee.getYearBirth());
         }
 
 //        Employee employeeWithMaxWageDepartment =
 
+    }
+
+    @BeforeEach
+    void setUp() {
+    }
+
+    @Test
+    void maxWageDepartment() {
+    }
+
+    @Test
+    void allEmployeeInfo() {
+    }
+
+    @Test
+    void minWageDepartment() {
+    }
+
+    @Test
+    void allEmployeeGroup() {
     }
 }
