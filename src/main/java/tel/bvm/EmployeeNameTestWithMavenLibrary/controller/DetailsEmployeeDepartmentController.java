@@ -47,5 +47,3 @@ public class DetailsEmployeeDepartmentController {
         return detailsEmployeeDepartmentService.allEmployeeGroup(departmentNumber);
     }
 }
-
-

@@ -47,4 +47,3 @@ public class EmployeeController {
         return service.allEmployeeInfo();
     }
 }
-

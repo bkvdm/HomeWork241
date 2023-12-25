@@ -9,13 +9,6 @@ import javax.annotation.PostConstruct;
 
 @Component
 public class AcceptedEmployees {
-    //    private final EmployeeService employeeService;
-//
-//    public AcceptedEmployees(EmployeeService employeeService) {
-//        this.employeeService = employeeService;
-//    }
-//    @Autowired
-//    private EmployeeService employeeService;
 
     private final EmployeeService employeeService;
 
