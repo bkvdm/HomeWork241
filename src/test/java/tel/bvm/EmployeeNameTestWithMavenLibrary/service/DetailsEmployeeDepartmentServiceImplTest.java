@@ -26,10 +26,52 @@ public class DetailsEmployeeDepartmentServiceImplTest {
     void initOut() {
         when(serviceMockEmployee.getMap()).thenReturn(MAP_EMPLOYEE);
         DetailsEmployeeDepartmentServiceImpl out = new DetailsEmployeeDepartmentServiceImpl(serviceMockEmployee);
+}
 
+    @Test
+    void maxWageDepartmentVerify() {
+    }
 
+    @Test
+    void allEmployeeInfoVerify() {
+    }
 
+    @Test
+    void minWageDepartmentVerify() {
+    }
 
+    @Test
+    void allEmployeeGroupVerify() {
+    }
+}
+//    @Test
+//    public void maxWageDepartmentVerify() {
+//
+//        for (Map.Entry<String, Employee> entry : MAP_EMPLOYEE.entrySet()) {
+//            Employee employee = entry.getValue();
+//            serviceMockEmployee.add(employee.getFirstName(),
+//                    employee.getLastName(),
+//                    employee.getPasswordNumber(),
+//                    employee.getYearBirth());
+//        }
+
+//        Employee employeeWithMaxWageDepartment =
+
+//    }
+//    @Test
+//    public void maxWageDepartmentVerify() {
+//
+//        for (Map.Entry<String, Employee> entry : MAP_EMPLOYEE.entrySet()) {
+//            Employee employee = entry.getValue();
+//            serviceMockEmployee.add(employee.getFirstName(),
+//                    employee.getLastName(),
+//                    employee.getPasswordNumber(),
+//                    employee.getYearBirth());
+//        }
+//
+////        Employee employeeWithMaxWageDepartment =
+//
+//    }
         //        DetailsEmployeeDepartmentServiceImpl detailsEmployeeDepartmentService = new DetailsEmployeeDepartmentServiceImpl(new HashMap<String, Employee>);
 //    }
 
@@ -48,54 +90,3 @@ public class DetailsEmployeeDepartmentServiceImplTest {
 //        EmployeeServiceImpl new employeeServiceImpl;
 
 //        serviceMockDetailsDepartment = new DetailsEmployeeDepartmentServiceImpl(serviceMockEmployee);
-}
-
-    @Test
-    public void maxWageDepartmentVerify() {
-
-        for (Map.Entry<String, Employee> entry : MAP_EMPLOYEE.entrySet()) {
-            Employee employee = entry.getValue();
-            serviceMockEmployee.add(employee.getFirstName(),
-                    employee.getLastName(),
-                    employee.getPasswordNumber(),
-                    employee.getYearBirth());
-        }
-
-//        Employee employeeWithMaxWageDepartment =
-
-    }
-//    @Test
-//    public void maxWageDepartmentVerify() {
-//
-//        for (Map.Entry<String, Employee> entry : MAP_EMPLOYEE.entrySet()) {
-//            Employee employee = entry.getValue();
-//            serviceMockEmployee.add(employee.getFirstName(),
-//                    employee.getLastName(),
-//                    employee.getPasswordNumber(),
-//                    employee.getYearBirth());
-//        }
-
-//        Employee employeeWithMaxWageDepartment =
-
-//    }
-
-    @BeforeEach
-    void setUp() {
-    }
-
-    @Test
-    void maxWageDepartment() {
-    }
-
-    @Test
-    void allEmployeeInfo() {
-    }
-
-    @Test
-    void minWageDepartment() {
-    }
-
-    @Test
-    void allEmployeeGroup() {
-    }
-}
